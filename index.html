@@ -11,6 +11,12 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             min-height: 100vh;
@@ -18,8 +24,8 @@
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background-attachment: fixed;
             color: white;
-            overflow: hidden;
             position: relative;
             padding: 1rem;
         }
@@ -44,6 +50,8 @@
             color: transparent;
             white-space: nowrap;
             margin-bottom: 1.5rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .subtitle {
@@ -52,6 +60,8 @@
             font-weight: 300;
             letter-spacing: 1px;
             white-space: nowrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .highlight {
@@ -60,12 +70,13 @@
         }
 
         .decoration {
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
             z-index: 1;
+            pointer-events: none;
         }
 
         .circle {
@@ -75,24 +86,24 @@
         }
 
         .circle-1 {
-            width: 300px;
-            height: 300px;
+            width: min(300px, 30vw);
+            height: min(300px, 30vw);
             top: 10%;
             right: 10%;
             animation: float 15s infinite ease-in-out;
         }
 
         .circle-2 {
-            width: 200px;
-            height: 200px;
+            width: min(200px, 20vw);
+            height: min(200px, 20vw);
             bottom: 15%;
             left: 10%;
             animation: float 12s infinite ease-in-out reverse;
         }
 
         .circle-3 {
-            width: 150px;
-            height: 150px;
+            width: min(150px, 15vw);
+            height: min(150px, 15vw);
             top: 50%;
             left: 20%;
             animation: float 10s infinite ease-in-out;
@@ -129,7 +140,7 @@
             }
         }
 
-        /* Responsive design - Updated for better device compatibility */
+        /* Enhanced responsive design */
         @media (max-width: 1200px) {
             h1 {
                 font-size: 4rem;
@@ -160,28 +171,30 @@
             }
             
             .circle-1 {
-                width: 200px;
-                height: 200px;
+                width: min(200px, 40vw);
+                height: min(200px, 40vw);
             }
             
             .circle-2 {
-                width: 150px;
-                height: 150px;
+                width: min(150px, 30vw);
+                height: min(150px, 30vw);
             }
             
             .circle-3 {
-                width: 100px;
-                height: 100px;
+                width: min(100px, 20vw);
+                height: min(100px, 20vw);
             }
         }
 
         @media (max-width: 576px) {
             h1 {
                 font-size: 2.5rem;
+                white-space: normal;
             }
             
             .subtitle {
                 font-size: 1.2rem;
+                white-space: normal;
             }
             
             .hero-container {
@@ -233,10 +246,12 @@
             h1 {
                 font-size: 2.5rem;
                 margin-bottom: 0.5rem;
+                white-space: normal;
             }
             
             .subtitle {
                 font-size: 1.2rem;
+                white-space: normal;
             }
             
             .circle-1, .circle-2, .circle-3 {
@@ -252,6 +267,13 @@
             
             .subtitle {
                 font-size: 2.5rem;
+            }
+        }
+        
+        /* Fix for text wrapping on very narrow screens */
+        @media (max-width: 400px) {
+            h1, .subtitle {
+                white-space: normal;
             }
         }
     </style>
