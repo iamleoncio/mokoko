@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -21,11 +21,13 @@
             color: white;
             overflow: hidden;
             position: relative;
+            padding: 1rem;
         }
 
         .hero-container {
             text-align: center;
-            max-width: 95%;
+            width: 100%;
+            max-width: 1200px;
             padding: 2rem;
             z-index: 2;
             position: relative;
@@ -127,7 +129,7 @@
             }
         }
 
-        /* Responsive design */
+        /* Responsive design - Updated for better device compatibility */
         @media (max-width: 1200px) {
             h1 {
                 font-size: 4rem;
@@ -156,6 +158,21 @@
             .subtitle {
                 font-size: 1.4rem;
             }
+            
+            .circle-1 {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .circle-2 {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .circle-3 {
+                width: 100px;
+                height: 100px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -165,6 +182,10 @@
             
             .subtitle {
                 font-size: 1.2rem;
+            }
+            
+            .hero-container {
+                padding: 1rem;
             }
         }
 
@@ -185,6 +206,52 @@
             
             .subtitle {
                 font-size: 0.9rem;
+            }
+        }
+
+        /* Handle very small screens */
+        @media (max-width: 320px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Handle landscape orientation on mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 0.5rem;
+            }
+            
+            .hero-container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .circle-1, .circle-2, .circle-3 {
+                transform: scale(0.7);
+            }
+        }
+
+        /* Handle very tall screens */
+        @media (min-height: 1000px) {
+            h1 {
+                font-size: 5rem;
+            }
+            
+            .subtitle {
+                font-size: 2.5rem;
             }
         }
     </style>
