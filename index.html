@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bye Mokoko !</title>
+    <title>Bye Mokoko!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -15,7 +15,7 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            overflow-x: hidden;
             font-family: 'Georgia', serif;
         }
 
@@ -27,7 +27,7 @@
             background: linear-gradient(135deg, #2c3e50 0%, #4a6572 100%);
             color: #333;
             position: relative;
-            padding: 1rem;
+            padding: 10px;
         }
 
         .container {
@@ -41,26 +41,26 @@
         .prompt-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            padding: 3rem 2rem;
+            padding: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-bottom: 2rem;
+            margin-bottom: 20px;
             transition: opacity 0.8s ease, transform 0.8s ease;
             width: 100%;
-            max-width: 600px;
             margin: 0 auto;
         }
 
         .prompt-container h1 {
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
             color: #2c3e50;
             font-weight: 400;
+            line-height: 1.3;
         }
 
         .envelope-icon {
-            font-size: 4rem;
+            font-size: 3.5rem;
             color: #c44569;
-            margin-bottom: 1.5rem;
+            margin-bottom: 15px;
             display: block;
             transition: transform 0.5s ease;
         }
@@ -72,21 +72,24 @@
         .buttons {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 15px;
+            margin-top: 20px;
             position: relative;
-            height: 50px;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 0.8rem 2rem;
+            padding: 12px 25px;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.5s ease;
             font-family: 'Georgia', serif;
             position: relative;
+            min-width: 120px;
+            flex: 1;
+            max-width: 200px;
         }
 
         #yes-btn {
@@ -119,9 +122,9 @@
         .envelope-container {
             display: none;
             position: relative;
-            width: 300px;
-            height: 200px;
-            margin: 0 auto;
+            width: 280px;
+            height: 180px;
+            margin: 0 auto 20px;
             transition: all 0.8s ease;
         }
 
@@ -130,7 +133,7 @@
             width: 100%;
             height: 100%;
             background: #c44569;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             transform-style: preserve-3d;
@@ -143,9 +146,9 @@
             top: 0;
             left: 0;
             right: 0;
-            border-top: 100px solid #d87093;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
+            border-top: 90px solid #d87093;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
             z-index: 2;
             transform-origin: top;
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -160,9 +163,9 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 100px;
+            height: 90px;
             background: #c44569;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 8px 8px;
             z-index: 1;
         }
 
@@ -175,7 +178,7 @@
             left: 5%;
             border-radius: 5px;
             z-index: 1;
-            padding: 1.5rem;
+            padding: 15px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transform: translateY(0);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
@@ -188,10 +191,10 @@
         }
 
         .envelope.open .letter {
-            transform: translateY(-180px);
+            transform: translateY(-150px);
             height: auto;
-            min-height: 400px;
-            max-height: 500px;
+            min-height: 350px;
+            max-height: 450px;
             z-index: 3;
             transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
         }
@@ -200,7 +203,7 @@
             opacity: 0;
             transition: opacity 0.5s ease;
             line-height: 1.6;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #2c3e50;
             max-height: 0;
             overflow: hidden;
@@ -209,7 +212,7 @@
 
         .envelope.open .letter-content {
             opacity: 1;
-            max-height: 500px;
+            max-height: 450px;
             overflow-y: auto;
             padding-right: 5px;
         }
@@ -225,12 +228,12 @@
         }
 
         .letter-content p {
-            margin-bottom: 1.2rem;
+            margin-bottom: 15px;
             text-align: left;
         }
 
         .signature {
-            margin-top: 1.5rem;
+            margin-top: 15px;
             font-style: italic;
             text-align: right;
             width: 100%;
@@ -266,7 +269,7 @@
             position: absolute;
             top: -50px;
             color: rgba(196, 69, 105, 0.7);
-            font-size: 20px;
+            font-size: 18px;
             animation: fall linear forwards;
         }
 
@@ -283,28 +286,27 @@
             }
         }
 
-        /* Message container */
+        /* Message container - will appear after envelope animation */
         .message-container {
             display: none;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            padding: 2.5rem;
+            padding: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             margin: 0 auto;
             width: 100%;
-            max-width: 700px;
             max-height: 80vh;
             overflow-y: auto;
             text-align: left;
             line-height: 1.6;
-            animation: fadeInScale 1.5s ease forwards;
+            animation: messageAppear 1.5s ease forwards;
             opacity: 0;
         }
 
-        @keyframes fadeInScale {
+        @keyframes messageAppear {
             0% {
                 opacity: 0;
-                transform: scale(0.8) translateY(20px);
+                transform: scale(0.9) translateY(20px);
             }
             100% {
                 opacity: 1;
@@ -313,102 +315,369 @@
         }
 
         .message-container p {
-            margin-bottom: 1.2rem;
+            margin-bottom: 15px;
+            font-size: 1rem;
         }
 
         .message-signature {
-            margin-top: 1.5rem;
+            margin-top: 15px;
             font-style: italic;
             text-align: right;
             color: #c44569;
             font-weight: 500;
         }
 
-        /* Envelope to message transition */
-        .envelope-to-message {
-            animation: envelopeToMessage 2s ease forwards;
+        /* Letter unfolding animation */
+        .letter-unfold {
+            animation: letterUnfold 2s ease forwards;
         }
 
-        @keyframes envelopeToMessage {
+        @keyframes letterUnfold {
             0% {
-                transform: scale(1);
-                opacity: 1;
+                transform: scale(1) translateY(0);
+                border-radius: 5px;
+                max-height: 150px;
             }
             30% {
-                transform: scale(1.1);
-                opacity: 0.8;
+                transform: scale(1.05) translateY(-80px);
+                border-radius: 8px;
+                max-height: 150px;
             }
             60% {
-                transform: scale(0.9) translateY(-20px);
-                opacity: 0.5;
+                transform: scale(1.1) translateY(-120px);
+                border-radius: 10px;
+                max-height: 150px;
             }
             100% {
-                transform: scale(0) translateY(-50px);
-                opacity: 0;
-                display: none;
+                transform: scale(1) translateY(0);
+                border-radius: 15px;
+                max-height: 450px;
+                width: 100%;
+                position: relative;
+                margin: 0 auto;
             }
         }
 
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .prompt-container h1 {
-                font-size: 1.8rem;
+        /* Mobile-first responsive design */
+        /* Small phones */
+        @media (max-width: 360px) {
+            body {
+                padding: 5px;
             }
             
-            .envelope-container {
-                width: 250px;
-                height: 170px;
-            }
-            
-            .letter-content {
-                font-size: 1rem;
-            }
-            
-            .envelope.open .letter {
-                transform: translateY(-150px);
-                min-height: 350px;
-                max-height: 400px;
-            }
-            
-            .message-container {
-                padding: 2rem;
-                max-height: 75vh;
-            }
-        }
-
-        @media (max-width: 480px) {
             .prompt-container {
-                padding: 2rem 1rem;
+                padding: 15px;
             }
             
             .prompt-container h1 {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .envelope-icon {
+                font-size: 2.8rem;
+                margin-bottom: 10px;
             }
             
             .buttons {
                 flex-direction: column;
-                gap: 1rem;
-                height: auto;
+                gap: 10px;
+                margin-top: 15px;
             }
             
             button {
                 width: 100%;
+                padding: 10px 20px;
+                font-size: 1rem;
+                max-width: none;
             }
             
             .envelope-container {
-                width: 200px;
-                height: 140px;
+                width: 220px;
+                height: 150px;
+                margin-bottom: 15px;
+            }
+            
+            .envelope:before {
+                border-top: 75px solid #d87093;
+                border-left: 110px solid transparent;
+                border-right: 110px solid transparent;
+            }
+            
+            .envelope .body {
+                height: 75px;
+            }
+            
+            .letter {
+                padding: 10px;
+            }
+            
+            .envelope.open .letter {
+                transform: translateY(-100px);
+                min-height: 280px;
+                max-height: 350px;
+            }
+            
+            .letter-content {
+                font-size: 0.9rem;
+            }
+            
+            .message-container {
+                padding: 15px;
+                max-height: 75vh;
+            }
+            
+            .message-container p {
+                font-size: 0.9rem;
+                margin-bottom: 12px;
+            }
+            
+            @keyframes letterUnfold {
+                0% {
+                    transform: scale(1) translateY(0);
+                    border-radius: 5px;
+                    max-height: 130px;
+                }
+                30% {
+                    transform: scale(1.05) translateY(-60px);
+                    border-radius: 8px;
+                    max-height: 130px;
+                }
+                60% {
+                    transform: scale(1.1) translateY(-90px);
+                    border-radius: 10px;
+                    max-height: 130px;
+                }
+                100% {
+                    transform: scale(1) translateY(0);
+                    border-radius: 15px;
+                    max-height: 350px;
+                    width: 100%;
+                    position: relative;
+                    margin: 0 auto;
+                }
+            }
+        }
+
+        /* Medium phones and small tablets */
+        @media (min-width: 361px) and (max-width: 480px) {
+            .prompt-container h1 {
+                font-size: 1.3rem;
+            }
+            
+            .envelope-icon {
+                font-size: 3rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+                max-width: none;
+            }
+            
+            .envelope-container {
+                width: 240px;
+                height: 160px;
+            }
+            
+            .envelope:before {
+                border-top: 80px solid #d87093;
+                border-left: 120px solid transparent;
+                border-right: 120px solid transparent;
+            }
+            
+            .envelope .body {
+                height: 80px;
             }
             
             .envelope.open .letter {
                 transform: translateY(-120px);
-                min-height: 320px;
-                max-height: 370px;
+                min-height: 300px;
+                max-height: 380px;
             }
             
             .message-container {
-                padding: 1.5rem;
+                padding: 15px;
+            }
+        }
+
+        /* Tablets and small laptops */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .prompt-container h1 {
+                font-size: 1.5rem;
+            }
+            
+            .envelope-icon {
+                font-size: 3.5rem;
+            }
+            
+            .buttons {
+                flex-direction: row;
+            }
+            
+            button {
+                flex: 0 1 auto;
+            }
+            
+            .envelope-container {
+                width: 260px;
+                height: 170px;
+            }
+            
+            .envelope:before {
+                border-top: 85px solid #d87093;
+                border-left: 130px solid transparent;
+                border-right: 130px solid transparent;
+            }
+            
+            .envelope .body {
+                height: 85px;
+            }
+            
+            .envelope.open .letter {
+                transform: translateY(-140px);
+                min-height: 320px;
+                max-height: 400px;
+            }
+        }
+
+        /* Desktop and larger screens */
+        @media (min-width: 769px) {
+            .prompt-container h1 {
+                font-size: 1.7rem;
+            }
+            
+            .envelope-icon {
+                font-size: 4rem;
+            }
+            
+            .buttons {
+                flex-direction: row;
+            }
+            
+            button {
+                flex: 0 1 auto;
+            }
+            
+            .envelope-container {
+                width: 300px;
+                height: 200px;
+            }
+            
+            .envelope:before {
+                border-top: 100px solid #d87093;
+                border-left: 150px solid transparent;
+                border-right: 150px solid transparent;
+            }
+            
+            .envelope .body {
+                height: 100px;
+            }
+            
+            .envelope.open .letter {
+                transform: translateY(-160px);
+                min-height: 350px;
+                max-height: 450px;
+            }
+            
+            .message-container {
+                padding: 25px;
+            }
+            
+            .message-container p {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Landscape orientation for mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 5px;
+            }
+            
+            .prompt-container {
+                padding: 10px;
+            }
+            
+            .prompt-container h1 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            
+            .envelope-icon {
+                font-size: 2.5rem;
+                margin-bottom: 8px;
+            }
+            
+            .buttons {
+                margin-top: 10px;
+            }
+            
+            button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .envelope-container {
+                width: 200px;
+                height: 130px;
+            }
+            
+            .envelope:before {
+                border-top: 65px solid #d87093;
+                border-left: 100px solid transparent;
+                border-right: 100px solid transparent;
+            }
+            
+            .envelope .body {
+                height: 65px;
+            }
+            
+            .letter {
+                padding: 8px;
+            }
+            
+            .envelope.open .letter {
+                transform: translateY(-80px);
+                min-height: 250px;
+                max-height: 300px;
+            }
+            
+            .letter-content {
+                font-size: 0.9rem;
+            }
+            
+            .message-container {
+                padding: 10px;
                 max-height: 70vh;
+            }
+        }
+
+        /* Very large screens */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 900px;
+            }
+            
+            .prompt-container h1 {
+                font-size: 2rem;
+            }
+            
+            .envelope-icon {
+                font-size: 5rem;
+            }
+            
+            button {
+                font-size: 1.1rem;
+                padding: 15px 30px;
+            }
+            
+            .message-container p {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -431,7 +700,7 @@
                 <div class="body"></div>
                 <div class="letter">
                     <div class="letter-content">
-                        <!-- This content won't be shown, it's just for the animation -->
+                        <!-- This content is for the small letter animation only -->
                     </div>
                 </div>
             </div>
@@ -453,6 +722,7 @@
             const envelopeContainer = document.getElementById('envelope-container');
             const messageContainer = document.getElementById('message-container');
             const envelope = document.getElementById('envelope');
+            const letter = document.querySelector('.letter');
             const yesBtn = document.getElementById('yes-btn');
             const noBtn = document.getElementById('no-btn');
             const heartsContainer = document.getElementById('hearts-container');
@@ -493,36 +763,47 @@
                     setTimeout(() => {
                         envelope.classList.add('open');
                         
-                        // After envelope opens, transition directly to message container
+                        // After envelope opens, start the letter unfolding animation
                         setTimeout(() => {
-                            envelopeContainer.classList.add('envelope-to-message');
+                            // Remove the envelope container
+                            envelopeContainer.style.display = 'none';
                             
-                            // Show message container with animation
+                            // Add unfolding animation to the letter
+                            letter.classList.add('letter-unfold');
+                            
+                            // Position the letter properly for the animation
+                            letter.style.position = 'relative';
+                            letter.style.margin = '0 auto';
+                            letter.style.width = '100%';
+                            letter.style.height = 'auto';
+                            letter.style.minHeight = '350px';
+                            letter.style.maxHeight = '450px';
+                            letter.style.backgroundColor = '#fefefe';
+                            letter.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
+                            letter.style.padding = '20px';
+                            letter.style.borderRadius = '15px';
+                            letter.style.zIndex = '10';
+                            
+                            // Add the letter to the container
+                            document.querySelector('.container').appendChild(letter);
+                            
+                            // After unfolding animation, show the content
                             setTimeout(() => {
-                                envelopeContainer.style.display = 'none';
-                                messageContainer.style.display = 'block';
+                                // Add the actual content to the letter
+                                letter.innerHTML = `
+                                    <div class="letter-content" style="opacity: 1; max-height: 450px; overflow-y: auto;">
+                                        <p>Leaving you for your peace is my last gift to you. I know staying would only hurt us, and you deserve the kind and calm I could never bring.</p>
+                                        <p>It wasn't an easy decision, but sometimes love means letting go, even if it breaks me. I hope you take care of yourself better than I ever could because this time, I won't be coming back.</p>
+                                        <p>You'll always be a part of me, a piece of my heart that time can never erase. But this is where our paths end. No matter how much I wish things were different, I wish your happiness, even if it's not with me.</p>
+                                        <p>I hope you find love that makes you feel safe, cherished and whole. You know you are worthy of love, Always.</p>
+                                        <p>This isn't giving up on you but giving you peace you deserve.</p>
+                                        <div class="signature">Goodbye my favorite stranger.</div>
+                                    </div>
+                                `;
                             }, 1500);
                         }, 1000);
                     }, 500);
                 }, 1000);
-            });
-            
-            // Allow clicking the envelope to open it as well
-            envelope.addEventListener('click', function() {
-                if (!envelope.classList.contains('open')) {
-                    envelope.classList.add('open');
-                    
-                    // After envelope opens, transition directly to message container
-                    setTimeout(() => {
-                        envelopeContainer.classList.add('envelope-to-message');
-                        
-                        // Show message container with animation
-                        setTimeout(() => {
-                            envelopeContainer.style.display = 'none';
-                            messageContainer.style.display = 'block';
-                        }, 1500);
-                    }, 1000);
-                }
             });
         });
     </script>
