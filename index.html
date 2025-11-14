@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bye Mokoko!</title>
+    <title>Bye Mokoko !</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -30,23 +30,23 @@
             padding: 10px;
         }
 
+        /* Container that works on all devices */
         .container {
-            text-align: center;
             width: 100%;
-            max-width: 800px;
-            z-index: 10;
+            max-width: 500px;
+            margin: 0 auto;
             position: relative;
+            z-index: 10;
         }
 
+        /* Prompt Section */
         .prompt-container {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            padding: 20px;
+            padding: 25px 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            width: 100%;
-            margin: 0 auto;
+            text-align: center;
+            transition: all 0.5s ease;
         }
 
         .prompt-container h1 {
@@ -54,7 +54,7 @@
             margin-bottom: 20px;
             color: #2c3e50;
             font-weight: 400;
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
         .envelope-icon {
@@ -65,17 +65,12 @@
             transition: transform 0.5s ease;
         }
 
-        .prompt-container:hover .envelope-icon {
-            transform: scale(1.1);
-        }
-
         .buttons {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
             position: relative;
-            flex-wrap: wrap;
         }
 
         button {
@@ -84,48 +79,48 @@
             border-radius: 50px;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.5s ease;
+            transition: all 0.3s ease;
             font-family: 'Georgia', serif;
-            position: relative;
-            min-width: 120px;
-            flex: 1;
-            max-width: 200px;
+            min-width: 100px;
         }
 
         #yes-btn {
             background: #c44569;
             color: white;
             box-shadow: 0 4px 15px rgba(196, 69, 105, 0.3);
-            z-index: 5;
         }
 
         #yes-btn:hover {
             background: #a53d5a;
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 6px 20px rgba(196, 69, 105, 0.4);
+            transform: translateY(-2px);
         }
 
         #no-btn {
             background: transparent;
             color: #7f8c8d;
             border: 1px solid #7f8c8d;
-            transition: all 0.3s ease;
-            z-index: 5;
-            opacity: 1;
+            position: relative;
         }
 
+        /* No button disappears on hover */
         .buttons:hover #no-btn {
             opacity: 0;
-            pointer-events: none;
+            visibility: hidden;
+        }
+
+        /* Envelope Section */
+        .envelope-section {
+            display: none;
+            text-align: center;
+            transition: all 0.5s ease;
         }
 
         .envelope-container {
-            display: none;
+            width: 250px;
+            height: 160px;
+            margin: 0 auto 30px;
             position: relative;
-            width: 280px;
-            height: 180px;
-            margin: 0 auto 20px;
-            transition: all 0.8s ease;
+            cursor: pointer;
         }
 
         .envelope {
@@ -134,10 +129,8 @@
             height: 100%;
             background: #c44569;
             border-radius: 8px;
-            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transform-style: preserve-3d;
-            cursor: pointer;
+            transition: transform 0.5s ease;
         }
 
         .envelope:before {
@@ -146,9 +139,9 @@
             top: 0;
             left: 0;
             right: 0;
-            border-top: 90px solid #d87093;
-            border-left: 140px solid transparent;
-            border-right: 140px solid transparent;
+            border-top: 80px solid #d87093;
+            border-left: 125px solid transparent;
+            border-right: 125px solid transparent;
             z-index: 2;
             transform-origin: top;
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -163,98 +156,75 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 90px;
+            height: 80px;
             background: #c44569;
             border-radius: 0 0 8px 8px;
             z-index: 1;
         }
 
-        .letter {
+        .letter-preview {
             position: absolute;
             background: #fefefe;
             width: 90%;
-            height: 85%;
-            top: 10px;
+            height: 70%;
+            top: 15px;
             left: 5%;
             border-radius: 5px;
             z-index: 1;
-            padding: 15px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transform: translateY(0);
             transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            overflow: hidden;
         }
 
-        .envelope.open .letter {
-            transform: translateY(-150px);
-            height: auto;
-            min-height: 350px;
-            max-height: 450px;
-            z-index: 3;
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+        .envelope.open .letter-preview {
+            transform: translateY(-120px);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
         }
 
-        .letter-content {
-            opacity: 0;
-            transition: opacity 0.5s ease;
+        /* Message Section */
+        .message-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            animation: messageAppear 1s ease forwards;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        @keyframes messageAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .message-content {
             line-height: 1.6;
             font-size: 1rem;
             color: #2c3e50;
-            max-height: 0;
-            overflow: hidden;
-            width: 100%;
         }
 
-        .envelope.open .letter-content {
-            opacity: 1;
-            max-height: 450px;
-            overflow-y: auto;
-            padding-right: 5px;
-        }
-
-        /* Custom scrollbar for letter content */
-        .envelope.open .letter-content::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .envelope.open .letter-content::-webkit-scrollbar-thumb {
-            background: #c44569;
-            border-radius: 10px;
-        }
-
-        .letter-content p {
+        .message-content p {
             margin-bottom: 15px;
             text-align: left;
         }
 
         .signature {
-            margin-top: 15px;
+            margin-top: 20px;
             font-style: italic;
             text-align: right;
-            width: 100%;
             color: #c44569;
             font-weight: 500;
         }
 
-        .hidden {
-            display: none;
-        }
-
-        .fade-out {
-            animation: fadeOut 1s ease forwards;
-        }
-
-        @keyframes fadeOut {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0; transform: scale(0.9); display: none; }
-        }
-
-        /* Falling broken hearts background */
+        /* Falling hearts background */
         .hearts-container {
             position: fixed;
             top: 0;
@@ -286,183 +256,33 @@
             }
         }
 
-        /* Message container - will appear after envelope animation */
-        .message-container {
-            display: none;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin: 0 auto;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            text-align: left;
-            line-height: 1.6;
-            animation: messageAppear 1.5s ease forwards;
-            opacity: 0;
+        /* Utility classes */
+        .hidden {
+            display: none !important;
         }
 
-        @keyframes messageAppear {
-            0% {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+        .fade-out {
+            animation: fadeOut 0.5s ease forwards;
         }
 
-        .message-container p {
-            margin-bottom: 15px;
-            font-size: 1rem;
-        }
-
-        .message-signature {
-            margin-top: 15px;
-            font-style: italic;
-            text-align: right;
-            color: #c44569;
-            font-weight: 500;
-        }
-
-        /* Letter unfolding animation */
-        .letter-unfold {
-            animation: letterUnfold 2s ease forwards;
-        }
-
-        @keyframes letterUnfold {
-            0% {
-                transform: scale(1) translateY(0);
-                border-radius: 5px;
-                max-height: 150px;
-            }
-            30% {
-                transform: scale(1.05) translateY(-80px);
-                border-radius: 8px;
-                max-height: 150px;
-            }
-            60% {
-                transform: scale(1.1) translateY(-120px);
-                border-radius: 10px;
-                max-height: 150px;
-            }
-            100% {
-                transform: scale(1) translateY(0);
-                border-radius: 15px;
-                max-height: 450px;
-                width: 100%;
-                position: relative;
-                margin: 0 auto;
-            }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.95); }
         }
 
         /* Mobile-first responsive design */
         /* Small phones */
         @media (max-width: 360px) {
-            body {
-                padding: 5px;
+            .container {
+                max-width: 100%;
             }
             
-            .prompt-container {
-                padding: 15px;
+            .prompt-container, .message-section {
+                padding: 20px 15px;
             }
             
             .prompt-container h1 {
                 font-size: 1.2rem;
-                margin-bottom: 15px;
-            }
-            
-            .envelope-icon {
-                font-size: 2.8rem;
-                margin-bottom: 10px;
-            }
-            
-            .buttons {
-                flex-direction: column;
-                gap: 10px;
-                margin-top: 15px;
-            }
-            
-            button {
-                width: 100%;
-                padding: 10px 20px;
-                font-size: 1rem;
-                max-width: none;
-            }
-            
-            .envelope-container {
-                width: 220px;
-                height: 150px;
-                margin-bottom: 15px;
-            }
-            
-            .envelope:before {
-                border-top: 75px solid #d87093;
-                border-left: 110px solid transparent;
-                border-right: 110px solid transparent;
-            }
-            
-            .envelope .body {
-                height: 75px;
-            }
-            
-            .letter {
-                padding: 10px;
-            }
-            
-            .envelope.open .letter {
-                transform: translateY(-100px);
-                min-height: 280px;
-                max-height: 350px;
-            }
-            
-            .letter-content {
-                font-size: 0.9rem;
-            }
-            
-            .message-container {
-                padding: 15px;
-                max-height: 75vh;
-            }
-            
-            .message-container p {
-                font-size: 0.9rem;
-                margin-bottom: 12px;
-            }
-            
-            @keyframes letterUnfold {
-                0% {
-                    transform: scale(1) translateY(0);
-                    border-radius: 5px;
-                    max-height: 130px;
-                }
-                30% {
-                    transform: scale(1.05) translateY(-60px);
-                    border-radius: 8px;
-                    max-height: 130px;
-                }
-                60% {
-                    transform: scale(1.1) translateY(-90px);
-                    border-radius: 10px;
-                    max-height: 130px;
-                }
-                100% {
-                    transform: scale(1) translateY(0);
-                    border-radius: 15px;
-                    max-height: 350px;
-                    width: 100%;
-                    position: relative;
-                    margin: 0 auto;
-                }
-            }
-        }
-
-        /* Medium phones and small tablets */
-        @media (min-width: 361px) and (max-width: 480px) {
-            .prompt-container h1 {
-                font-size: 1.3rem;
             }
             
             .envelope-icon {
@@ -476,119 +296,139 @@
             
             button {
                 width: 100%;
-                max-width: none;
+            }
+            
+            .envelope-container {
+                width: 220px;
+                height: 140px;
+            }
+            
+            .envelope:before {
+                border-top: 70px solid #d87093;
+                border-left: 110px solid transparent;
+                border-right: 110px solid transparent;
+            }
+            
+            .envelope .body {
+                height: 70px;
+            }
+            
+            .envelope.open .letter-preview {
+                transform: translateY(-100px);
+            }
+            
+            .message-content {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Medium phones */
+        @media (min-width: 361px) and (max-width: 480px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            .prompt-container h1 {
+                font-size: 1.3rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
             }
             
             .envelope-container {
                 width: 240px;
-                height: 160px;
+                height: 150px;
             }
             
             .envelope:before {
-                border-top: 80px solid #d87093;
+                border-top: 75px solid #d87093;
                 border-left: 120px solid transparent;
                 border-right: 120px solid transparent;
             }
             
             .envelope .body {
-                height: 80px;
+                height: 75px;
             }
             
-            .envelope.open .letter {
-                transform: translateY(-120px);
-                min-height: 300px;
-                max-height: 380px;
-            }
-            
-            .message-container {
-                padding: 15px;
+            .envelope.open .letter-preview {
+                transform: translateY(-110px);
             }
         }
 
-        /* Tablets and small laptops */
+        /* Tablets and larger phones */
         @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                max-width: 450px;
+            }
+            
             .prompt-container h1 {
                 font-size: 1.5rem;
-            }
-            
-            .envelope-icon {
-                font-size: 3.5rem;
-            }
-            
-            .buttons {
-                flex-direction: row;
-            }
-            
-            button {
-                flex: 0 1 auto;
-            }
-            
-            .envelope-container {
-                width: 260px;
-                height: 170px;
-            }
-            
-            .envelope:before {
-                border-top: 85px solid #d87093;
-                border-left: 130px solid transparent;
-                border-right: 130px solid transparent;
-            }
-            
-            .envelope .body {
-                height: 85px;
-            }
-            
-            .envelope.open .letter {
-                transform: translateY(-140px);
-                min-height: 320px;
-                max-height: 400px;
-            }
-        }
-
-        /* Desktop and larger screens */
-        @media (min-width: 769px) {
-            .prompt-container h1 {
-                font-size: 1.7rem;
             }
             
             .envelope-icon {
                 font-size: 4rem;
             }
             
-            .buttons {
-                flex-direction: row;
+            .envelope-container {
+                width: 280px;
+                height: 170px;
             }
             
-            button {
-                flex: 0 1 auto;
+            .envelope:before {
+                border-top: 85px solid #d87093;
+                border-left: 140px solid transparent;
+                border-right: 140px solid transparent;
+            }
+            
+            .envelope .body {
+                height: 85px;
+            }
+            
+            .envelope.open .letter-preview {
+                transform: translateY(-130px);
+            }
+        }
+
+        /* Desktop */
+        @media (min-width: 769px) {
+            .container {
+                max-width: 500px;
+            }
+            
+            .prompt-container h1 {
+                font-size: 1.6rem;
+            }
+            
+            .envelope-icon {
+                font-size: 4.5rem;
             }
             
             .envelope-container {
                 width: 300px;
-                height: 200px;
+                height: 180px;
             }
             
             .envelope:before {
-                border-top: 100px solid #d87093;
+                border-top: 90px solid #d87093;
                 border-left: 150px solid transparent;
                 border-right: 150px solid transparent;
             }
             
             .envelope .body {
-                height: 100px;
+                height: 90px;
             }
             
-            .envelope.open .letter {
-                transform: translateY(-160px);
-                min-height: 350px;
-                max-height: 450px;
+            .envelope.open .letter-preview {
+                transform: translateY(-140px);
             }
             
-            .message-container {
-                padding: 25px;
-            }
-            
-            .message-container p {
+            .message-content {
                 font-size: 1.1rem;
             }
         }
@@ -599,8 +439,12 @@
                 padding: 5px;
             }
             
-            .prompt-container {
-                padding: 10px;
+            .container {
+                max-width: 90%;
+            }
+            
+            .prompt-container, .message-section {
+                padding: 15px;
             }
             
             .prompt-container h1 {
@@ -610,7 +454,7 @@
             
             .envelope-icon {
                 font-size: 2.5rem;
-                margin-bottom: 8px;
+                margin-bottom: 10px;
             }
             
             .buttons {
@@ -625,6 +469,7 @@
             .envelope-container {
                 width: 200px;
                 height: 130px;
+                margin-bottom: 15px;
             }
             
             .envelope:before {
@@ -637,47 +482,16 @@
                 height: 65px;
             }
             
-            .letter {
-                padding: 8px;
+            .envelope.open .letter-preview {
+                transform: translateY(-90px);
             }
             
-            .envelope.open .letter {
-                transform: translateY(-80px);
-                min-height: 250px;
-                max-height: 300px;
+            .message-section {
+                max-height: 60vh;
             }
             
-            .letter-content {
+            .message-content {
                 font-size: 0.9rem;
-            }
-            
-            .message-container {
-                padding: 10px;
-                max-height: 70vh;
-            }
-        }
-
-        /* Very large screens */
-        @media (min-width: 1200px) {
-            .container {
-                max-width: 900px;
-            }
-            
-            .prompt-container h1 {
-                font-size: 2rem;
-            }
-            
-            .envelope-icon {
-                font-size: 5rem;
-            }
-            
-            button {
-                font-size: 1.1rem;
-                padding: 15px 30px;
-            }
-            
-            .message-container p {
-                font-size: 1.2rem;
             }
         }
     </style>
@@ -686,6 +500,7 @@
     <div class="hearts-container" id="hearts-container"></div>
     
     <div class="container">
+        <!-- Initial Prompt -->
         <div class="prompt-container" id="prompt">
             <i class="fas fa-envelope envelope-icon"></i>
             <h1>Do you want to open the envelope?</h1>
@@ -695,34 +510,36 @@
             </div>
         </div>
         
-        <div class="envelope-container" id="envelope-container">
-            <div class="envelope" id="envelope">
-                <div class="body"></div>
-                <div class="letter">
-                    <div class="letter-content">
-                        <!-- This content is for the small letter animation only -->
-                    </div>
+        <!-- Envelope Section -->
+        <div class="envelope-section" id="envelope-section">
+            <div class="envelope-container">
+                <div class="envelope" id="envelope">
+                    <div class="body"></div>
+                    <div class="letter-preview"></div>
                 </div>
             </div>
+            <p style="color: white; margin-top: 10px;">Click the envelope to open it</p>
         </div>
         
-        <div class="message-container" id="message-container">
-            <p>Leaving you for your peace is my last gift to you. I know staying would only hurt us, and you deserve the kind and calm I could never bring.</p>
-            <p>It wasn't an easy decision, but sometimes love means letting go, even if it breaks me. I hope you take care of yourself better than I ever could because this time, I won't be coming back.</p>
-            <p>You'll always be a part of me, a piece of my heart that time can never erase. But this is where our paths end. No matter how much I wish things were different, I wish your happiness, even if it's not with me.</p>
-            <p>I hope you find love that makes you feel safe, cherished and whole. You know you are worthy of love, Always.</p>
-            <p>This isn't giving up on you but giving you peace you deserve.</p>
-            <div class="message-signature">Goodbye my favorite stranger.</div>
+        <!-- Message Section -->
+        <div class="message-section" id="message-section">
+            <div class="message-content">
+                <p>Leaving you for your peace is my last gift to you. I know staying would only hurt us, and you deserve the kind and calm I could never bring.</p>
+                <p>It wasn't an easy decision, but sometimes love means letting go, even if it breaks me. I hope you take care of yourself better than I ever could because this time, I won't be coming back.</p>
+                <p>You'll always be a part of me, a piece of my heart that time can never erase. But this is where our paths end. No matter how much I wish things were different, I wish your happiness, even if it's not with me.</p>
+                <p>I hope you find love that makes you feel safe, cherished and whole. You know you are worthy of love, Always.</p>
+                <p>This isn't giving up on you but giving you peace you deserve.</p>
+                <div class="signature">Goodbye my favorite stranger.</div>
+            </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const promptContainer = document.getElementById('prompt');
-            const envelopeContainer = document.getElementById('envelope-container');
-            const messageContainer = document.getElementById('message-container');
+            const envelopeSection = document.getElementById('envelope-section');
+            const messageSection = document.getElementById('message-section');
             const envelope = document.getElementById('envelope');
-            const letter = document.querySelector('.letter');
             const yesBtn = document.getElementById('yes-btn');
             const noBtn = document.getElementById('no-btn');
             const heartsContainer = document.getElementById('hearts-container');
@@ -749,61 +566,53 @@
             // No button functionality - hide on hover
             noBtn.addEventListener('mouseover', function() {
                 noBtn.style.opacity = '0';
-                noBtn.style.pointerEvents = 'none';
+                noBtn.style.visibility = 'hidden';
             });
             
             // Yes button functionality
             yesBtn.addEventListener('click', function() {
+                // Fade out prompt
                 promptContainer.classList.add('fade-out');
+                
+                // After fade out, hide prompt and show envelope
                 setTimeout(() => {
                     promptContainer.classList.add('hidden');
-                    envelopeContainer.style.display = 'block';
+                    envelopeSection.style.display = 'block';
+                }, 500);
+            });
+            
+            // Envelope click to open
+            envelope.addEventListener('click', function() {
+                if (!envelope.classList.contains('open')) {
+                    envelope.classList.add('open');
                     
-                    // Trigger envelope opening animation after a short delay
+                    // After envelope opens, show message
                     setTimeout(() => {
-                        envelope.classList.add('open');
+                        envelopeSection.classList.add('fade-out');
                         
-                        // After envelope opens, start the letter unfolding animation
                         setTimeout(() => {
-                            // Remove the envelope container
-                            envelopeContainer.style.display = 'none';
-                            
-                            // Add unfolding animation to the letter
-                            letter.classList.add('letter-unfold');
-                            
-                            // Position the letter properly for the animation
-                            letter.style.position = 'relative';
-                            letter.style.margin = '0 auto';
-                            letter.style.width = '100%';
-                            letter.style.height = 'auto';
-                            letter.style.minHeight = '350px';
-                            letter.style.maxHeight = '450px';
-                            letter.style.backgroundColor = '#fefefe';
-                            letter.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
-                            letter.style.padding = '20px';
-                            letter.style.borderRadius = '15px';
-                            letter.style.zIndex = '10';
-                            
-                            // Add the letter to the container
-                            document.querySelector('.container').appendChild(letter);
-                            
-                            // After unfolding animation, show the content
-                            setTimeout(() => {
-                                // Add the actual content to the letter
-                                letter.innerHTML = `
-                                    <div class="letter-content" style="opacity: 1; max-height: 450px; overflow-y: auto;">
-                                        <p>Leaving you for your peace is my last gift to you. I know staying would only hurt us, and you deserve the kind and calm I could never bring.</p>
-                                        <p>It wasn't an easy decision, but sometimes love means letting go, even if it breaks me. I hope you take care of yourself better than I ever could because this time, I won't be coming back.</p>
-                                        <p>You'll always be a part of me, a piece of my heart that time can never erase. But this is where our paths end. No matter how much I wish things were different, I wish your happiness, even if it's not with me.</p>
-                                        <p>I hope you find love that makes you feel safe, cherished and whole. You know you are worthy of love, Always.</p>
-                                        <p>This isn't giving up on you but giving you peace you deserve.</p>
-                                        <div class="signature">Goodbye my favorite stranger.</div>
-                                    </div>
-                                `;
-                            }, 1500);
-                        }, 1000);
-                    }, 500);
-                }, 1000);
+                            envelopeSection.classList.add('hidden');
+                            messageSection.style.display = 'block';
+                        }, 500);
+                    }, 1500);
+                }
+            });
+            
+            // Also allow clicking the envelope container
+            document.querySelector('.envelope-container').addEventListener('click', function() {
+                if (!envelope.classList.contains('open')) {
+                    envelope.classList.add('open');
+                    
+                    // After envelope opens, show message
+                    setTimeout(() => {
+                        envelopeSection.classList.add('fade-out');
+                        
+                        setTimeout(() => {
+                            envelopeSection.classList.add('hidden');
+                            messageSection.style.display = 'block';
+                        }, 500);
+                    }, 1500);
+                }
             });
         });
     </script>
