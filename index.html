@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BYE</title>
+    <title>A Final Message</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,294 +15,515 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow-x: hidden;
+            overflow: hidden;
+            font-family: 'Georgia', serif;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            background-attachment: fixed;
-            color: white;
+            background: linear-gradient(135deg, #2c3e50 0%, #4a6572 100%);
+            color: #333;
             position: relative;
             padding: 1rem;
         }
 
-        .hero-container {
+        .container {
             text-align: center;
             width: 100%;
-            max-width: 1200px;
-            padding: 2rem;
-            z-index: 2;
+            max-width: 800px;
+            z-index: 10;
             position: relative;
         }
 
-        h1 {
-            font-size: 4.5rem;
-            font-weight: 700;
-            line-height: 1;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(to right, #ffffff, #e0e0e0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            white-space: nowrap;
-            margin-bottom: 1.5rem;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        .subtitle {
-            font-size: 2rem;
-            opacity: 0.9;
-            font-weight: 300;
-            letter-spacing: 1px;
-            white-space: nowrap;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-        .highlight {
-            color: #ff6b6b;
-            font-weight: 600;
-        }
-
-        .decoration {
-            position: fixed;
+        .prompt-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+            transition: opacity 0.8s ease, transform 0.8s ease;
             width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .prompt-container h1 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            font-weight: 400;
+        }
+
+        .envelope-icon {
+            font-size: 4rem;
+            color: #c44569;
+            margin-bottom: 1.5rem;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .prompt-container:hover .envelope-icon {
+            transform: scale(1.1);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            height: 50px;
+        }
+
+        button {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            font-family: 'Georgia', serif;
+            position: relative;
+        }
+
+        #yes-btn {
+            background: #c44569;
+            color: white;
+            box-shadow: 0 4px 15px rgba(196, 69, 105, 0.3);
+            z-index: 5;
+        }
+
+        #yes-btn:hover {
+            background: #a53d5a;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(196, 69, 105, 0.4);
+        }
+
+        #no-btn {
+            background: transparent;
+            color: #7f8c8d;
+            border: 1px solid #7f8c8d;
+            transition: all 0.3s ease;
+            z-index: 5;
+            opacity: 1;
+        }
+
+        .buttons:hover #no-btn {
+            opacity: 0;
             pointer-events: none;
         }
 
-        .circle {
+        .envelope-container {
+            display: none;
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;
+            transition: all 0.8s ease;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #c44569;
+            border-radius: 10px;
+            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .envelope:before {
+            content: '';
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.03);
+            top: 0;
+            left: 0;
+            right: 0;
+            border-top: 100px solid #d87093;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            z-index: 2;
+            transform-origin: top;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .circle-1 {
-            width: min(300px, 30vw);
-            height: min(300px, 30vw);
-            top: 10%;
-            right: 10%;
-            animation: float 15s infinite ease-in-out;
+        .envelope.open:before {
+            transform: rotateX(180deg);
+            z-index: 0;
         }
 
-        .circle-2 {
-            width: min(200px, 20vw);
-            height: min(200px, 20vw);
-            bottom: 15%;
-            left: 10%;
-            animation: float 12s infinite ease-in-out reverse;
+        .envelope .body {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            background: #c44569;
+            border-radius: 0 0 10px 10px;
+            z-index: 1;
         }
 
-        .circle-3 {
-            width: min(150px, 15vw);
-            height: min(150px, 15vw);
-            top: 50%;
-            left: 20%;
-            animation: float 10s infinite ease-in-out;
+        .letter {
+            position: absolute;
+            background: #fefefe;
+            width: 90%;
+            height: 85%;
+            top: 10px;
+            left: 5%;
+            border-radius: 5px;
+            z-index: 1;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
+        .envelope.open .letter {
+            transform: translateY(-180px);
+            height: auto;
+            min-height: 400px;
+            max-height: 500px;
+            z-index: 3;
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+        }
+
+        .letter-content {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: #2c3e50;
+            max-height: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .envelope.open .letter-content {
+            opacity: 1;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        /* Custom scrollbar for letter content */
+        .envelope.open .letter-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .envelope.open .letter-content::-webkit-scrollbar-thumb {
+            background: #c44569;
+            border-radius: 10px;
+        }
+
+        .letter-content p {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .signature {
+            margin-top: 1.5rem;
+            font-style: italic;
+            text-align: right;
+            width: 100%;
+            color: #c44569;
+            font-weight: 500;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fade-out {
+            animation: fadeOut 1s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.9); display: none; }
+        }
+
+        /* Falling broken hearts background */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            top: -50px;
+            color: rgba(196, 69, 105, 0.7);
+            font-size: 20px;
+            animation: fall linear forwards;
+        }
+
+        .broken-heart::before {
+            content: "\f7a9";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
             }
-            25% {
-                transform: translateY(-20px) translateX(10px);
-            }
-            50% {
-                transform: translateY(10px) translateX(-10px);
-            }
-            75% {
-                transform: translateY(-10px) translateX(-20px);
-            }
         }
 
-        .fade-in {
-            animation: fadeIn 1.5s ease-out forwards;
+        /* Message container */
+        .message-container {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin: 0 auto;
+            width: 100%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: left;
+            line-height: 1.6;
+            animation: fadeInScale 1.5s ease forwards;
             opacity: 0;
         }
 
-        @keyframes fadeIn {
-            from {
+        @keyframes fadeInScale {
+            0% {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: scale(0.8) translateY(20px);
             }
-            to {
+            100% {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1) translateY(0);
             }
         }
 
-        /* Enhanced responsive design */
-        @media (max-width: 1200px) {
-            h1 {
-                font-size: 4rem;
+        .message-container p {
+            margin-bottom: 1.2rem;
+        }
+
+        .message-signature {
+            margin-top: 1.5rem;
+            font-style: italic;
+            text-align: right;
+            color: #c44569;
+            font-weight: 500;
+        }
+
+        /* Envelope to message transition */
+        .envelope-to-message {
+            animation: envelopeToMessage 2s ease forwards;
+        }
+
+        @keyframes envelopeToMessage {
+            0% {
+                transform: scale(1);
+                opacity: 1;
             }
-            
-            .subtitle {
+            30% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            60% {
+                transform: scale(0.9) translateY(-20px);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(0) translateY(-50px);
+                opacity: 0;
+                display: none;
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .prompt-container h1 {
                 font-size: 1.8rem;
             }
-        }
-
-        @media (max-width: 992px) {
-            h1 {
-                font-size: 3.5rem;
+            
+            .envelope-container {
+                width: 250px;
+                height: 170px;
             }
             
-            .subtitle {
-                font-size: 1.6rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
+            .letter-content {
+                font-size: 1rem;
             }
             
-            .subtitle {
-                font-size: 1.4rem;
+            .envelope.open .letter {
+                transform: translateY(-150px);
+                min-height: 350px;
+                max-height: 400px;
             }
             
-            .circle-1 {
-                width: min(200px, 40vw);
-                height: min(200px, 40vw);
-            }
-            
-            .circle-2 {
-                width: min(150px, 30vw);
-                height: min(150px, 30vw);
-            }
-            
-            .circle-3 {
-                width: min(100px, 20vw);
-                height: min(100px, 20vw);
-            }
-        }
-
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 2.5rem;
-                white-space: normal;
-            }
-            
-            .subtitle {
-                font-size: 1.2rem;
-                white-space: normal;
-            }
-            
-            .hero-container {
-                padding: 1rem;
+            .message-container {
+                padding: 2rem;
+                max-height: 75vh;
             }
         }
 
         @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
+            .prompt-container {
+                padding: 2rem 1rem;
             }
             
-            .subtitle {
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            h1 {
-                font-size: 1.7rem;
-            }
-            
-            .subtitle {
-                font-size: 0.9rem;
-            }
-        }
-
-        /* Handle very small screens */
-        @media (max-width: 320px) {
-            h1 {
+            .prompt-container h1 {
                 font-size: 1.5rem;
             }
             
-            .subtitle {
-                font-size: 0.8rem;
-            }
-        }
-
-        /* Handle landscape orientation on mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
-            body {
-                padding: 0.5rem;
+            .buttons {
+                flex-direction: column;
+                gap: 1rem;
+                height: auto;
             }
             
-            .hero-container {
-                padding: 1rem;
+            button {
+                width: 100%;
             }
             
-            h1 {
-                font-size: 2.5rem;
-                margin-bottom: 0.5rem;
-                white-space: normal;
+            .envelope-container {
+                width: 200px;
+                height: 140px;
             }
             
-            .subtitle {
-                font-size: 1.2rem;
-                white-space: normal;
+            .envelope.open .letter {
+                transform: translateY(-120px);
+                min-height: 320px;
+                max-height: 370px;
             }
             
-            .circle-1, .circle-2, .circle-3 {
-                transform: scale(0.7);
-            }
-        }
-
-        /* Handle very tall screens */
-        @media (min-height: 1000px) {
-            h1 {
-                font-size: 5rem;
-            }
-            
-            .subtitle {
-                font-size: 2.5rem;
-            }
-        }
-        
-        /* Fix for text wrapping on very narrow screens */
-        @media (max-width: 400px) {
-            h1, .subtitle {
-                white-space: normal;
+            .message-container {
+                padding: 1.5rem;
+                max-height: 70vh;
             }
         }
     </style>
 </head>
 <body>
-    <div class="decoration">
-        <div class="circle circle-1"></div>
-        <div class="circle circle-2"></div>
-        <div class="circle circle-3"></div>
-    </div>
+    <div class="hearts-container" id="hearts-container"></div>
     
-    <div class="hero-container">
-        <h1 class="fade-in">SORRY! <span class="highlight">GOODLUCK NA LANG BOI!</span></h1>
-        <p class="subtitle fade-in" style="animation-delay: 0.5s;">SALAMAT !</p>
+    <div class="container">
+        <div class="prompt-container" id="prompt">
+            <i class="fas fa-envelope envelope-icon"></i>
+            <h1>Do you want to open the envelope?</h1>
+            <div class="buttons">
+                <button id="yes-btn">Yes</button>
+                <button id="no-btn">No</button>
+            </div>
+        </div>
+        
+        <div class="envelope-container" id="envelope-container">
+            <div class="envelope" id="envelope">
+                <div class="body"></div>
+                <div class="letter">
+                    <div class="letter-content">
+                        <!-- This content won't be shown, it's just for the animation -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="message-container" id="message-container">
+            <p>Leaving you for your peace is my last gift to you. I know staying would only hurt us, and you deserve the kind and calm I could never bring.</p>
+            <p>It wasn't an easy decision, but sometimes love means letting go, even if it breaks me. I hope you take care of yourself better than I ever could because this time, I won't be coming back.</p>
+            <p>You'll always be a part of me, a piece of my heart that time can never erase. But this is where our paths end. No matter how much I wish things were different, I wish your happiness, even if it's not with me.</p>
+            <p>I hope you find love that makes you feel safe, cherished and whole. You know you are worthy of love, Always.</p>
+            <p>This isn't giving up on you but giving you peace you deserve.</p>
+            <div class="message-signature">Goodbye my favorite stranger.</div>
+        </div>
     </div>
 
     <script>
-        // Simple script to ensure the animation runs after page load
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.fade-in').forEach(element => {
-                element.style.opacity = 0;
+            const promptContainer = document.getElementById('prompt');
+            const envelopeContainer = document.getElementById('envelope-container');
+            const messageContainer = document.getElementById('message-container');
+            const envelope = document.getElementById('envelope');
+            const yesBtn = document.getElementById('yes-btn');
+            const noBtn = document.getElementById('no-btn');
+            const heartsContainer = document.getElementById('hearts-container');
+            
+            // Create falling broken hearts
+            function createHearts() {
+                const heart = document.createElement('div');
+                heart.classList.add('heart', 'broken-heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                
+                heartsContainer.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 8000);
+            }
+            
+            // Create hearts periodically
+            setInterval(createHearts, 300);
+            
+            // No button functionality - hide on hover
+            noBtn.addEventListener('mouseover', function() {
+                noBtn.style.opacity = '0';
+                noBtn.style.pointerEvents = 'none';
             });
             
-            setTimeout(() => {
-                document.querySelectorAll('.fade-in').forEach(element => {
-                    element.style.opacity = 1;
-                });
-            }, 100);
+            // Yes button functionality
+            yesBtn.addEventListener('click', function() {
+                promptContainer.classList.add('fade-out');
+                setTimeout(() => {
+                    promptContainer.classList.add('hidden');
+                    envelopeContainer.style.display = 'block';
+                    
+                    // Trigger envelope opening animation after a short delay
+                    setTimeout(() => {
+                        envelope.classList.add('open');
+                        
+                        // After envelope opens, transition directly to message container
+                        setTimeout(() => {
+                            envelopeContainer.classList.add('envelope-to-message');
+                            
+                            // Show message container with animation
+                            setTimeout(() => {
+                                envelopeContainer.style.display = 'none';
+                                messageContainer.style.display = 'block';
+                            }, 1500);
+                        }, 1000);
+                    }, 500);
+                }, 1000);
+            });
+            
+            // Allow clicking the envelope to open it as well
+            envelope.addEventListener('click', function() {
+                if (!envelope.classList.contains('open')) {
+                    envelope.classList.add('open');
+                    
+                    // After envelope opens, transition directly to message container
+                    setTimeout(() => {
+                        envelopeContainer.classList.add('envelope-to-message');
+                        
+                        // Show message container with animation
+                        setTimeout(() => {
+                            envelopeContainer.style.display = 'none';
+                            messageContainer.style.display = 'block';
+                        }, 1500);
+                    }, 1000);
+                }
+            });
         });
     </script>
 </body>
